@@ -10,9 +10,11 @@ requests in your Android projects in Eclipse.
 
 ### NetworkManager
 
-    public void makeRequest(final ResponseCallback responseCallback,
-                            final String url,
-                            final String jsonData);
+```java
+public void makeRequest(final ResponseCallback responseCallback,
+                        final String url,
+                        final String jsonData);
+```
 
 Performs either a POST or a GET request.
 
@@ -25,14 +27,18 @@ __jsonData__: The JSON data to send with the request. This value may be `null`.
 
 ### ResponseCallback
 
-    public void onSuccessCallback(int statusCode, String response);
+```java
+public void onSuccessCallback(int statusCode, String response);
+```
 
 Fired when the request was successfull.
 
 __statusCode__: The status code of the response.  
 __response__: The body of the response.
 
-    public void onFailureCallback(int statusCode, String response);
+```java
+public void onFailureCallback(int statusCode, String response);
+```
 
 Fired when the request failed.
 
@@ -51,38 +57,40 @@ That's it!
 
 An example of how to use this library.
 
-    import com.ocb.network.NetworkManager;
-    import com.ocb.network.ResponseCallback;
+```java
+import com.ocb.network.NetworkManager;
+import com.ocb.network.ResponseCallback;
 
-    public class MainActivity extends Activity implements ResponseCallback {
+public class MainActivity extends Activity implements ResponseCallback {
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            // The usual.
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // The usual.
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-            // Create a NetworkManager instance.
-            NetworkManager networkManager = new NetworkManager();
+        // Create a NetworkManager instance.
+        NetworkManager networkManager = new NetworkManager();
 
-            // Make a POST request.
-            networkManager.makeRequest(this,
-                                       "http://my-server.com/database/users",
-                                       "{\"name\":\"OCB\"}");
+        // Make a POST request.
+        networkManager.makeRequest(this,
+                                   "http://my-server.com/database/users",
+                                   "{\"name\":\"OCB\"}");
 
-            // Make a GET request.
-            networkManager.makeRequest(this,
-                                       "http://my-server.com/database/users/OCB",
-                                       null);
-        }
-
-        @Override
-        public void onSuccessCallback(int statusCode, String response) {
-            //TODO: implement.
-        }
-
-        @Override
-        public void onFailureCallback(int statusCode, String response) {
-            //TODO: implement.
-        }
+        // Make a GET request.
+        networkManager.makeRequest(this,
+                                   "http://my-server.com/database/users/OCB",
+                                   null);
     }
+
+    @Override
+    public void onSuccessCallback(int statusCode, String response) {
+        //TODO: implement.
+    }
+
+    @Override
+    public void onFailureCallback(int statusCode, String response) {
+        //TODO: implement.
+    }
+}
+```
